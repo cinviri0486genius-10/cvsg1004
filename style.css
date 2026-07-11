@@ -1,0 +1,541 @@
+/* ==========================================
+   1. ESTILOS BASE Y CONFIGURACIÓN GENERAL
+   ========================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: #060608;
+    color: #f3f4f6;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+}
+
+#canvas-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    display: block;
+}
+
+.content-layer {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+}
+
+/* ==========================================
+   2. HERO SECTION
+   ========================================== */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
+    pointer-events: none;
+}
+header, main, .hero-footer, nav a, .btn {
+    pointer-events: auto;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.badge {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    padding: 6px 14px;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 4px;
+    color: #00f0ff;
+}
+nav a {
+    font-size: 14px;
+    color: #9ca3af;
+    text-decoration: none;
+    margin-left: 24px;
+    transition: color 0.3s;
+}
+nav a:hover {
+    color: #00f0ff;
+}
+main {
+    max-width: 850px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 60px 0;
+}
+h1 {
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+.gradient-text {
+    background: linear-gradient(90deg, #00f0ff, #3ae7ff, #9d4edd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.sub-tagline {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #9d4edd;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+p.hero-desc {
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    color: #9ca3af;
+    max-width: 650px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+.btn-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.btn-primary {
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 0 10px 20px rgba(0, 240, 255, 0.1);
+}
+.btn-primary:hover {
+    background-color: #00f0ff;
+    box-shadow: 0 10px 25px rgba(0, 240, 255, 0.3);
+}
+.btn-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+}
+.btn-secondary:hover {
+    border-color: #00f0ff;
+    color: #00f0ff;
+}
+.hero-footer {
+    font-size: 11px;
+    color: #6b7280;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+
+/* ==========================================
+   3. ESTRUCTURA DE TÍTULOS Y SECCIONES
+   ========================================== */
+.portfolio-section, .experience-section {
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.section-title::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(0,240,255,0.4), transparent);
+}
+
+/* ==========================================
+   4. PORTAFOLIO GRID
+   ========================================== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+.project-card {
+    background: rgba(10, 11, 16, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    transition: all 0.4s ease;
+    clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%);
+}
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 240, 255, 0.3);
+}
+.project-card:hover::before {
+    transform: translateX(100%);
+}
+.project-tag {
+    font-size: 10px;
+    font-family: monospace;
+    color: #00f0ff;
+    background: rgba(0, 240, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 16px;
+}
+.project-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.project-card p {
+    font-size: 14px;
+    color: #9ca3af;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+.tech-stack {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.tech-pill {
+    font-size: 11px;
+    font-family: monospace;
+    color: #9d4edd;
+    background: rgba(157, 78, 221, 0.08);
+    padding: 2px 6px;
+    border: 1px solid rgba(157, 78, 221, 0.15);
+    border-radius: 3px;
+}
+
+/* ==========================================
+   5. TIMELINE DE EXPERIENCIA
+   ========================================== */
+.timeline {
+    border-left: 2px solid rgba(0, 240, 255, 0.2);
+    margin-left: 20px;
+    padding-left: 30px;
+    position: relative;
+}
+.timeline-item {
+    margin-bottom: 40px;
+    position: relative;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -41px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #00f0ff;
+    box-shadow: 0 0 10px #00f0ff;
+}
+.timeline-date {
+    font-size: 12px;
+    font-family: monospace;
+    color: #00f0ff;
+    margin-bottom: 5px;
+}
+.timeline-content h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.timeline-content h4 {
+    font-size: 14px;
+    color: #9d4edd;
+    margin-bottom: 10px;
+}
+.timeline-content p {
+    font-size: 14px;
+    color: #9ca3af;
+    line-height: 1.5;
+}
+/* Asegura el estilo exacto de los textos en tu línea de tiempo */
+.timeline-item .timeline-date {
+    font-size: 12px;
+    font-family: monospace;
+    color: #00f0ff;
+    margin-bottom: 6px;
+    display: block;
+    letter-spacing: 1px;
+}
+.timeline-content h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+.timeline-content h4 {
+    font-size: 14px;
+    color: #9d4edd; /* Tono morado exacto para la empresa */
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+.timeline-content p {
+    font-size: 14px;
+    color: #9ca3af;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   6. SECCIÓN DE CERTIFICACIONES
+   ========================================== */
+.certifications-section {
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+.cert-item {
+    background: rgba(13, 15, 24, 0.5);
+    border: 1px solid rgba(157, 78, 221, 0.15);
+    padding: 20px;
+    border-radius: 4px;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+.cert-item:hover {
+    border-color: #00f0ff;
+    background: rgba(13, 15, 24, 0.8);
+    box-shadow: 0 10px 20px rgba(0, 240, 255, 0.03);
+    transform: scale(1.02);
+}
+.cert-emitter {
+    font-size: 10px;
+    font-family: monospace;
+    color: #9d4edd;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+.cert-item h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+.cert-item p {
+    font-size: 13px;
+    color: #9ca3af;
+    line-height: 1.4;
+}
+
+/* ==========================================
+   7. SECCIÓN DE CONTACTO (ESTILO TERMINAL)
+   ========================================== */
+.contact-section {
+    padding: 60px 40px 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
+    background: rgba(8, 9, 14, 0.6);
+    border: 1px solid rgba(0, 240, 255, 0.15);
+    padding: 40px;
+    border-radius: 4px;
+    backdrop-filter: blur(12px);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+.contact-networks h3, .contact-form-block h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-family: monospace;
+}
+.contact-networks p {
+    font-size: 14px;
+    color: #9ca3af;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+/* Botones de Redes en columna */
+.network-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.network-buttons .btn {
+    text-align: left;
+    font-family: monospace;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* Lógica de Alineación del Formulario Interactivo */
+.terminal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.form-group {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+    gap: 15px;
+}
+.form-group.field-textarea {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border-bottom: none;
+}
+.form-group label {
+    font-family: monospace;
+    font-size: 12px;
+    color: #00f0ff;
+    white-space: nowrap;
+    min-width: 160px;
+}
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 4px 0;
+}
+.form-group textarea {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    padding: 12px;
+    resize: none;
+    font-family: inherit;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #4b5563;
+}
+.form-group:focus-within {
+    border-color: #9d4edd;
+}
+.form-group:focus-within label {
+    color: #9d4edd;
+}
+.btn-submit {
+    border: none;
+    cursor: pointer;
+    font-family: monospace;
+    font-weight: 700;
+    letter-spacing: 1px;
+    align-self: flex-start;
+}
+
+/* Estados de feedback AJAX */
+.form-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+.status-terminal-text {
+    font-family: monospace;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+.status-terminal-text.loading { color: #3ae7ff; }
+.status-terminal-text.success { color: #00f0ff; text-shadow: 0 0 8px rgba(0, 240, 255, 0.4); }
+.status-terminal-text.error { color: #ff3a6b; }
+
+/* ==========================================
+   8. ANIMACIONES Y CURSOR DE TERMINAL
+   ========================================== */
+.pulse { animation: pulseAnimation 2s infinite; }
+@keyframes pulseAnimation {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.terminal-cursor {
+    animation: blink-cursor 0.8s infinite steps(2);
+    color: #9d4edd;
+    font-weight: bold;
+}
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* ==========================================
+   9. MEDIA QUERIES (RESPONSIVE)
+   ========================================== */
+@media (max-width: 900px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 30px 24px;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero-section { padding: 24px; }
+    header { flex-direction: column; gap: 16px; align-items: flex-start; }
+    nav a { margin-left: 0; margin-right: 20px; }
+    .hero-footer { flex-direction: column; gap: 10px; align-items: flex-start; }
+    .portfolio-section, .experience-section, .certifications-section { padding: 40px 24px; }
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .form-group label {
+        min-width: auto;
+    }
+}
